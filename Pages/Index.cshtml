@@ -1,0 +1,81 @@
+ @page
+@model IndexModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Collaborative Whiteboard</title>
+    <link href="~/css/whiteboard.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Collaborative Whiteboard</h1>
+            <div class="session-controls">
+                <input type="text" id="sessionName" placeholder="Enter session name" />
+                <button id="createSession">Create New Session</button>
+                <button id="loadSession">Load Session</button>
+                <select id="sessionList">
+                    <option value="">Select a session...</option>
+                </select>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="toolbar">
+                <div class="tool-group">
+                    <label>Tool:</label>
+                    <button id="penTool" class="tool-btn active">✏️ Pen</button>
+                    <button id="eraserTool" class="tool-btn">🧹 Eraser</button>
+                </div>
+                
+                <div class="tool-group">
+                    <label>Color:</label>
+                    <input type="color" id="colorPicker" value="#000000" />
+                    <div class="color-presets">
+                        <div class="color-preset" style="background: #000000" data-color="#000000"></div>
+                        <div class="color-preset" style="background: #ff0000" data-color="#ff0000"></div>
+                        <div class="color-preset" style="background: #00ff00" data-color="#00ff00"></div>
+                        <div class="color-preset" style="background: #0000ff" data-color="#0000ff"></div>
+                        <div class="color-preset" style="background: #ffff00" data-color="#ffff00"></div>
+                        <div class="color-preset" style="background: #ff00ff" data-color="#ff00ff"></div>
+                        <div class="color-preset" style="background: #00ffff" data-color="#00ffff"></div>
+                    </div>
+                </div>
+                
+                <div class="tool-group">
+                    <label>Size:</label>
+                    <input type="range" id="brushSize" min="1" max="20" value="2" />
+                    <span id="brushSizeValue">2</span>px
+                </div>
+                
+                <div class="tool-group">
+                    <button id="clearBoard" class="danger-btn">🗑️ Clear Board</button>
+                </div>
+                
+                <div class="tool-group">
+                    <button id="saveSession">💾 Save</button>
+                </div>
+            </div>
+            
+            <div class="canvas-container">
+                <canvas id="whiteboard" width="1200" height="600"></canvas>
+                <div class="users-online">
+                    <h4>Users Online:</h4>
+                    <div id="usersList"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-bar">
+            <span id="connectionStatus">Disconnected</span>
+            <span id="currentSession">No session loaded</span>
+            <span id="currentUser"></span>
+        </div>
+    </div>
+    
+    <!-- SignalR JavaScript Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.min.js"></script>
+    <script src="~/js/whiteboard.js"></script>
+</body>
+</html>
