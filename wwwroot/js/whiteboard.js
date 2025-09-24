@@ -420,7 +420,9 @@ class CollaborativeWhiteboard {
     }
 
     try {
-      const response = await fetch(`/api/Home/LoadSession?sessionId=${sessionId}`)
+      const response = await fetch(`/api/Home/LoadSession/${sessionId}`)
+      alert('Loading session. This may take a moment...')
+      alert(response.status)
       const result = await response.json()
 
       if (result.success) {

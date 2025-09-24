@@ -5,13 +5,7 @@ using CollaborativeWhiteboard.Hubs;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
-        options.JsonSerializerOptions.DictionaryKeyPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
-    });
-          // API controllers only
+builder.Services.AddControllers();           // API controllers only
 builder.Services.AddRazorPages();           // Razor Pages
 builder.Services.AddSignalR();              // SignalR
 
