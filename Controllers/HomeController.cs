@@ -4,8 +4,8 @@ using CollaborativeWhiteboard.Models;
 
 namespace CollaborativeWhiteboard.Controllers
 {
-    // Controller for API endpoints only
     [Route("api/[controller]")]
+    [ApiController]
     public class HomeController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -15,8 +15,7 @@ namespace CollaborativeWhiteboard.Controllers
             _context = context;
         }
 
-        // API endpoints only — no Index() method here
-
+        // Create a new session
         [HttpPost("CreateSession")]
         public async Task<IActionResult> CreateSession([FromBody] CreateSessionRequest request)
         {
@@ -27,7 +26,7 @@ namespace CollaborativeWhiteboard.Controllers
             {
                 var session = new WhiteboardSession
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.NewGuid().ToString(), // string ID
                     Name = request.Name,
                     CreatedDate = DateTime.UtcNow,
                     LastModified = DateTime.UtcNow
@@ -44,8 +43,9 @@ namespace CollaborativeWhiteboard.Controllers
             }
         }
 
-        [HttpGet("LoadSession/{sessionId:guid}")]
-        public async Task<IActionResult> LoadSession(Guid sessionId)
+        // Load a session with drawing actions
+        [HttpGet("LoadSession/{sessionId}")]
+        public async Task<IActionResult> LoadSession(string sessionId)
         {
             try
             {
@@ -90,6 +90,7 @@ namespace CollaborativeWhiteboard.Controllers
             }
         }
 
+        // Get all sessions
         [HttpGet("GetSessions")]
         public async Task<IActionResult> GetSessions()
         {
@@ -114,12 +115,15 @@ namespace CollaborativeWhiteboard.Controllers
             }
         }
 
+        // Save a drawing action
         [HttpPost("SaveDrawingAction")]
         public async Task<IActionResult> SaveDrawingAction([FromBody] DrawingActionRequest request)
         {
             try
             {
+                // sessionId is string now
                 var session = await _context.WhiteboardSessions
+                    .Include(s => s.DrawingActions)
                     .FirstOrDefaultAsync(s => s.Id == request.SessionId);
 
                 if (session == null)
@@ -127,8 +131,8 @@ namespace CollaborativeWhiteboard.Controllers
 
                 var action = new DrawingAction
                 {
-                    Id = Guid.NewGuid(),
-                    SessionId = request.SessionId,
+                    Id = Guid.NewGuid().ToString(), // string ID
+                    SessionId = request.SessionId,   // string FK
                     ActionType = request.ActionType,
                     StartX = request.StartX,
                     StartY = request.StartY,
@@ -145,7 +149,7 @@ namespace CollaborativeWhiteboard.Controllers
 
                 await _context.SaveChangesAsync();
 
-                return Ok(new { success = true });
+                return Ok(new { success = true, actionId = action.Id });
             }
             catch (Exception ex)
             {
@@ -162,7 +166,7 @@ namespace CollaborativeWhiteboard.Controllers
 
     public class DrawingActionRequest
     {
-        public Guid SessionId { get; set; }
+        public string SessionId { get; set; } = string.Empty; // string now
         public string ActionType { get; set; } = string.Empty;
         public float StartX { get; set; }
         public float StartY { get; set; }

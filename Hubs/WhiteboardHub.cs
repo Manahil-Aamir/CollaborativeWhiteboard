@@ -86,7 +86,7 @@ namespace CollaborativeWhiteboard.Hubs
                 // Save to database for persistence
                 var dbAction = new DrawingAction
                 {
-                    SessionId = Guid.Parse(action.SessionId),
+                    SessionId = action.SessionId,
                     UserId = action.UserId,
                     ActionType = action.ActionType,
                     StartX = action.StartX,
@@ -125,7 +125,7 @@ namespace CollaborativeWhiteboard.Hubs
                 // Save clear action to database
                 var clearAction = new DrawingAction
                 {
-                    SessionId = Guid.Parse(sessionId),
+                    SessionId = sessionId,
                     UserId = userId,
                     ActionType = "clear",
                     StartX = 0,

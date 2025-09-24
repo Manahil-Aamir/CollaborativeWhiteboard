@@ -400,8 +400,8 @@ class CollaborativeWhiteboard {
 
         result.sessions.forEach((session) => {
           const option = document.createElement('option')
-          option.value = session.Id
-          option.textContent = `${session.Name} (${new Date(
+          option.value = session.id
+          option.textContent = `${session.name} (${new Date(
             session.LastModified
           ).toLocaleDateString()})`
           sessionList.appendChild(option)

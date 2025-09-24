@@ -4,10 +4,10 @@ namespace CollaborativeWhiteboard.Models
 {
     public class DrawingAction
     {
-        public Guid Id { get; set; }
+        public String Id { get; set; }
         
         [Required]
-        public Guid SessionId { get; set; }
+        public String SessionId { get; set; }
         
         [Required]
         [StringLength(50)]
