@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CollaborativeWhiteboard")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b941baf698897f0a10f669909fbbe9807dc0b87d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72b19a7c4549c3e5db2567737debfd3cd62e3ff7")]
 [assembly: System.Reflection.AssemblyProductAttribute("CollaborativeWhiteboard")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CollaborativeWhiteboard")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

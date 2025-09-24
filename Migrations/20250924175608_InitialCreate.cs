@@ -19,11 +19,13 @@ namespace CollaborativeWhiteboard.Migrations
                 name: "WhiteboardSessions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Id = table.Column<string>(type: "varchar(36)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    LastModified = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    LastModified = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.ComputedColumn)
                 },
                 constraints: table =>
                 {
@@ -35,9 +37,10 @@ namespace CollaborativeWhiteboard.Migrations
                 name: "DrawingActions",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    SessionId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Id = table.Column<string>(type: "varchar(36)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SessionId = table.Column<string>(type: "varchar(36)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserId = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ActionType = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
@@ -48,8 +51,8 @@ namespace CollaborativeWhiteboard.Migrations
                     EndY = table.Column<double>(type: "double", nullable: false),
                     Color = table.Column<string>(type: "varchar(7)", maxLength: 7, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    LineWidth = table.Column<int>(type: "int", nullable: false),
-                    Timestamp = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    LineWidth = table.Column<float>(type: "float", nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
                 },
                 constraints: table =>
                 {

@@ -28,8 +28,6 @@ namespace CollaborativeWhiteboard.Controllers
                 {
                     Id = Guid.NewGuid().ToString(), // string ID
                     Name = request.Name,
-                    CreatedDate = DateTime.UtcNow,
-                    LastModified = DateTime.UtcNow
                 };
 
                 _context.WhiteboardSessions.Add(session);

@@ -25,8 +25,7 @@ namespace CollaborativeWhiteboard.Migrations
             modelBuilder.Entity("CollaborativeWhiteboard.Models.DrawingAction", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("ActionType")
                         .IsRequired()
@@ -38,27 +37,29 @@ namespace CollaborativeWhiteboard.Migrations
                         .HasMaxLength(7)
                         .HasColumnType("varchar(7)");
 
-                    b.Property<float>("EndX")
-                        .HasColumnType("float");
+                    b.Property<double>("EndX")
+                        .HasColumnType("double");
 
-                    b.Property<float>("EndY")
-                        .HasColumnType("float");
+                    b.Property<double>("EndY")
+                        .HasColumnType("double");
 
                     b.Property<float>("LineWidth")
                         .HasColumnType("float");
 
                     b.Property<string>("SessionId")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(36)");
 
-                    b.Property<float>("StartX")
-                        .HasColumnType("float");
+                    b.Property<double>("StartX")
+                        .HasColumnType("double");
 
-                    b.Property<float>("StartY")
-                        .HasColumnType("float");
+                    b.Property<double>("StartY")
+                        .HasColumnType("double");
 
                     b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime(6)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -77,14 +78,19 @@ namespace CollaborativeWhiteboard.Migrations
             modelBuilder.Entity("CollaborativeWhiteboard.Models.WhiteboardSession", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime(6)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<DateTime>("LastModified")
-                        .HasColumnType("datetime(6)");
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlComputedColumn(b.Property<DateTime>("LastModified"));
 
                     b.Property<string>("Name")
                         .IsRequired()

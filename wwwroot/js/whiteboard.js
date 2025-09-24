@@ -402,7 +402,7 @@ class CollaborativeWhiteboard {
           const option = document.createElement('option')
           option.value = session.id
           option.textContent = `${session.name} (${new Date(
-            session.LastModified
+            session.lastModified
           ).toLocaleDateString()})`
           sessionList.appendChild(option)
         })
@@ -431,7 +431,7 @@ class CollaborativeWhiteboard {
         this.clearCanvas()
         this.redrawFromActions(result.drawingActions)
 
-        this.updateSessionStatus(`Session: ${result.session.Name}`)
+        this.updateSessionStatus(`Session: ${result.session.name}`)
         alert('Session loaded successfully!')
       } else {
         alert('Error loading session: ' + result.error)
@@ -452,13 +452,13 @@ class CollaborativeWhiteboard {
         this.clearCanvas()
       } else {
         this.drawLine(
-          action.StartX,
-          action.StartY,
-          action.EndX,
-          action.EndY,
-          action.Color,
-          action.LineWidth,
-          action.ActionType
+          action.startX,
+          action.startY,
+          action.endX,
+          action.endY,
+          action.color,
+          action.lineWidth,
+          action.actionType
         )
       }
     })

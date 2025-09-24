@@ -232,4 +232,4 @@ D:\CollaborativeWhiteboard\obj\Debug\net9.0\CollaborativeWhiteboard.pdb
 D:\CollaborativeWhiteboard\obj\Debug\net9.0\CollaborativeWhiteboard.genruntimeconfig.cache
 D:\CollaborativeWhiteboard\obj\Debug\net9.0\ref\CollaborativeWhiteboard.dll
 D:\CollaborativeWhiteboard\obj\Debug\net9.0\CollaborativeWhiteboard.sourcelink.json
-D:\CollaborativeWhiteboard\obj\Debug\net9.0\compressed\etbekywubh-oqzqnvo65h.gz
+D:\CollaborativeWhiteboard\obj\Debug\net9.0\compressed\etbekywubh-qdpr489sj4.gz
